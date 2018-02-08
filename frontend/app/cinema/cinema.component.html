@@ -1,0 +1,44 @@
+<main>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-3">
+                <form>
+                    <div class="form-group">
+                        <input [(ngModel)]="location" name="location" type="text" class="form-control" placeholder="Location">
+                    </div>
+                    <div class="form-group">
+                        <input [(ngModel)]="movie" name="movie" type="text" class="form-control" placeholder="Movie">
+                    </div>
+                    <button type="submit" class="btn btn-primary" (click)=getCinemas()>Search</button>
+                </form>
+                <div class="ads">
+                    <img src="../../assets/images/placeholder.png" alt="Ads" class="img-thumbnail">
+                </div>
+            </div>
+            <div class="col-lg-9">
+                <div *ngFor="let cinema of cinemas">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading clearfix">
+                            <h4 class="panel-title pull-left">{{cinema.name}}</h4>
+                        </div>
+                        <div class="panel-body">
+                            <p class="list-group-item-text pull-left">{{cinema.location}}</p>
+                            <p class="list-group-item-text pull-right">Rating: {{cinema.rating}}/5</p>
+                        </div>
+                        <div *ngIf="cinema.movie && cinema.movie.length > 0" class="panel-footer clearfix">
+                            <div class="pull-left">
+                                Today in the cinema: {{getMovieNames(cinema)}}
+                            </div>
+                        </div>
+                        <div *ngIf="cinema.movie && cinema.movie.length > 0" class="panel-footer clearfix">
+                            <div class="pull-left">
+                                <button class="btn btn-info" routerLink="/reviews" [queryParams]="{cinema: cinema._id}"
+                                        routerLinkActive="active">Show Reviews</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>

@@ -1,0 +1,25 @@
+<main>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-3">
+                <div class="ads">
+                    <img src="../../assets/images/placeholder.png" alt="Ads" class="img-thumbnail">
+                </div>
+            </div>
+            <div class="col-lg-9">
+                <div *ngFor="let review of reviews">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading clearfix">
+                            <h4 class="panel-title pull-left">{{review.user.firstName + " " + review.user.lastName}}</h4>
+                            <h4 class="panel-title pull-right">{{format(review.date)}}</h4>
+                        </div>
+                        <div class="panel-body">
+                            <p class="list-group-item-text pull-left">{{review.content}}</p>
+                            <p class="list-group-item-text pull-right">{{"Rating: " + review.rating}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>

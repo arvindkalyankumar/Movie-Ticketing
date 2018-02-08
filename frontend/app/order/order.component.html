@@ -1,0 +1,56 @@
+<main>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-3">
+                <div class="ads">
+                    <img src="../../assets/images/placeholder.png" alt="Ads" class="img-thumbnail">
+                </div>
+            </div>
+            <div class="col-lg-9">
+                <div *ngFor="let order of orders">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading clearfix">
+                            <h4 class="panel-title pull-left">Cinema: {{order.cinema.name}}</h4>
+                        </div>
+                        <div class="panel-body">
+                            <p class="list-group-item-text pull-left"> {{order.movie.title}} ({{format(order.orderDate)}})</p>
+                            <br/>
+                            <button class="btn review-btn"
+                                    (click)="isReviewPanelActive.set(order._id, !isReviewPanelActive.get(order._id))">
+                                Click here to write a review
+                            </button>
+                        </div>
+                        <div class="panel-footer clearfix" *ngIf="isReviewPanelActive.get(order._id)">
+                            <form>
+                                <fieldset class="form-group">
+                                    <select #reviewRating="ngModel" name="rating" [(ngModel)]="order.reviewRating" class="form-control" title="Stars">
+                                        <option disabled="disabled" selected="selected"
+                                                [value]="null">Rate your visit to the cinema</option>
+                                        <option *ngFor="let value of [1, 2, 3, 4, 5]" [value]="value">{{value}}</option>
+                                    </select>
+                                </fieldset>
+                                <fieldset class="form-group">
+	                                <textarea name="content" class="form-control" placeholder="Write a short review..."
+                                              title="Review" [(ngModel)]="order.reviewContent" #reviewContent="ngModel"
+                                              required minlength="20"></textarea>
+                                </fieldset>
+                                <fieldset class="form-group">
+                                    <input [disabled]="!order.reviewRating || reviewContent.errors" type="submit" (click)="onSubmit(order)"
+                                           class="btn btn-primary pull-right" value="Submit"/>
+                                </fieldset>
+                                <div *ngIf="reviewContent.errors && (reviewContent.dirty || reviewContent.touched)"
+                                          class="alert alert-danger form-group">
+                                    Review content is required and has to contain at least 20 characters
+                                </div>
+                                <div *ngIf="reviewRating.errors && (reviewRating.dirty || reviewRating.touched)"
+                                     class="alert alert-danger form-group">
+                                    Please rate your visit
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>

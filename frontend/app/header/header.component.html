@@ -1,0 +1,45 @@
+<main>
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="/">SEBA MovieApp</a>
+            </div>
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li [class.active]="currentRouteEquals('/movies')">
+                        <a routerLink="/movies" routerLinkActive="active">Movies</a>
+                    <li [class.active]="currentRouteEquals('/cinemas')">
+                        <a routerLink="/cinemas" routerLinkActive="active">Cinemas</a>
+                    </li>
+                </ul>
+                <ul *ngIf="!isAuthorized()" class="nav navbar-nav navbar-right">
+                    <li [class.active]="currentRouteEquals('/login')">
+                        <a href="javascript:void(0)" (click)="signIn()">Sign in</a>
+                    </li>
+                </ul>
+                <ul *ngIf="isAuthorized()" class="nav navbar-nav navbar-right">
+                    <li><a href="/" (click)="signOut()">Sign out</a></li>
+                </ul>
+                <ul *ngIf="isAuthorized()" class="nav navbar-nav navbar-right">
+                    <li [class.active]="currentRouteEquals('/order')">
+                        <a routerLink="/order" routerLinkActive="active">Orders</a>
+                    </li>
+                </ul>
+                <ul *ngIf="isAuthorized()" class="nav navbar-nav navbar-right">
+                    <li [class.active]="currentRouteEquals('/profile')">
+                        <a routerLink="/profile" routerLinkActive="active">Profile</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</main>
+<carousel [interval]="NextPhotoInterval" [noWrap]="noLoopSlides">
+    <slide *ngFor="let slidez of slides; let index=index" [active]="slidez.active">
+        <img [src]="slidez.image" style="margin:auto;">
+        <div class="carousel-caption">
+            <h3 style="background-color: transparent;color: white;"></h3>
+            <p style="background-color: transparent;color: white;">{{slidez.text}}</p>
+        </div>
+    </slide>
+</carousel>
