@@ -1,8 +1,5 @@
-# SEBA Movie App
+# Movie App
 An online platform for searching cinemas and booking tickets
-
-Team #29
-
 
 ## Setup
 1) Create a personal config file <i>config/app.config.ts</i> by copying the sample <i>config/app.config.sample.ts</i>
